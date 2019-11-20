@@ -10,8 +10,8 @@ Install
 2. Activate virtual env: `source medi/bin/activate`
 3. Instal requirements: `pip install -r requirements.txt`
 
-Usage
+Run program
 -----------
 	python medical_expert_system.py
 
-Answer the questions in the prompt with best to your knowledge. 
+Answer the questions in the prompt with best to your knowledge.
