@@ -8,28 +8,29 @@ d_treatment_map = {}
 
 def preprocess():
 	global diseases_list,diseases_symptoms,symptom_map,d_desc_map,d_treatment_map
-	diseases = open("diseases.txt")
-	diseases_t = diseases.read()
-	diseases_list = diseases_t.split("\n")
-	diseases.close()
-	for disease in diseases_list:
-		disease_s_file = open("Disease symptoms/" + disease + ".txt")
+	diseases = open("diseases.txt") #opens the diseases file and retrieve them
+	diseases_t = diseases.read() #reads the diseases from the text file and store them in diseases_t
+	diseases_list = diseases_t.split("\n") #creates a list of diseases
+	diseases.close() #close diseases file
+	for disease in diseases_list: #loops through the disease list
+		disease_s_file = open("Disease symptoms/" + disease + ".txt") #open the file for the specified disease
 		disease_s_data = disease_s_file.read()
-		s_list = disease_s_data.split("\n")
+		s_list = disease_s_data.split("\n")#stores the symptoms answer
 		diseases_symptoms.append(s_list)
 		symptom_map[str(s_list)] = disease
 		disease_s_file.close()
-		disease_s_file = open("Disease descriptions/" + disease + ".txt")
+		disease_s_file = open("Disease descriptions/" + disease + ".txt") #retrieve the disease discription
 		disease_s_data = disease_s_file.read()
 		d_desc_map[disease] = disease_s_data
 		disease_s_file.close()
-		disease_s_file = open("Disease treatments/" + disease + ".txt")
+		disease_s_file = open("Disease treatments/" + disease + ".txt") #Retrieves the diseases treatments
 		disease_s_data = disease_s_file.read()
 		d_treatment_map[disease] = disease_s_data
 		disease_s_file.close()
 	
 
 def identify_disease(*arguments):
+	"""Compares the response from the user with that in the disease files"""
 	symptom_list = []
 	for symptom in arguments:
 		symptom_list.append(symptom)
@@ -37,12 +38,15 @@ def identify_disease(*arguments):
 	return symptom_map[str(symptom_list)]
 
 def get_details(disease):
+	"""Gets the disease details"""
 	return d_desc_map[disease]
 
 def get_treatments(disease):
+	"""Gets the disease treatments"""
 	return d_treatment_map[disease]
 
 def if_not_matched(disease):
+	"""if the user response doesnt match that in the data base"""
 		print("")
 		id_disease = disease
 		disease_details = get_details(id_disease)
@@ -57,6 +61,7 @@ def if_not_matched(disease):
 # @my_decorator is just a way of saying just_some_function = my_decorator(just_some_function)
 #def identify_disease(headache, back_pain, chest_pain, cough, fainting, sore_throat, fatigue, restlessness,low_body_temp ,fever,sunken_eyes):
 class Greetings(KnowledgeEngine):
+	"""Knowledge base for identifying the disease a patient may have"""
 	@DefFacts()
 	def _initial_action(self):
 		print("")
