@@ -71,10 +71,6 @@ class Greetings(KnowledgeEngine):
 	def symptom_0(self):
 		self.declare(Fact(headache=input("headache: ")))
 
-	# @Rule(Fact(action='find_disease'), NOT(Fact(back_pain=W())),salience = 1)
-	# def symptom_1(self):
-	# 	self.declare(Fact(back_pain=input("back pain: ")))
-
 	@Rule(Fact(action='find_disease'), NOT(Fact(chest_pain=W())),salience = 1)
 	def symptom_2(self):
 		self.declare(Fact(chest_pain=input("chest pain: ")))
@@ -83,17 +79,9 @@ class Greetings(KnowledgeEngine):
 	def symptom_3(self):
 		self.declare(Fact(cough=input("cough: ")))
 
-	# @Rule(Fact(action='find_disease'), NOT(Fact(fainting=W())),salience = 1)
-	# def symptom_4(self):
-	# 	self.declare(Fact(fainting=input("fainting: ")))
-
 	@Rule(Fact(action='find_disease'), NOT(Fact(fatigue=W())),salience = 1)
 	def symptom_5(self):
 		self.declare(Fact(fatigue=input("fatigue: ")))
-	 
-	# @Rule(Fact(action='find_disease'), NOT(Fact(sunken_eyes=W())),salience = 1)
-	# def symptom_6(self):
-	# 	self.declare(Fact(sunken_eyes=input("sunken eyes: ")))
 	
 	@Rule(Fact(action='find_disease'), NOT(Fact(low_body_temp=W())),salience = 1)
 	def symptom_7(self):
@@ -114,10 +102,6 @@ class Greetings(KnowledgeEngine):
 	@Rule(Fact(action='find_disease'), NOT(Fact(nausea=W())),salience = 1)
 	def symptom_11(self):
 		self.declare(Fact(nausea=input("Nausea/vomiting/diarrhea: ")))
-
-	# @Rule(Fact(action='find_disease'), NOT(Fact(blurred_vision=W())),salience = 1)
-	# def symptom_12(self):
-	# 	self.declare(Fact(blurred_vision=input("blurred_vision: ")))
 
 	@Rule(Fact(action='find_disease'),Fact(headache="no"),Fact(chest_pain="no"),Fact(cough="no"),Fact(sore_throat="no"),Fact(fatigue="yes"),Fact(restlessness="no"),Fact(low_body_temp="no"),Fact(fever="yes"),Fact(nausea="yes"))
 	def disease_0(self):
@@ -190,18 +174,14 @@ class Greetings(KnowledgeEngine):
 
 	@Rule(Fact(action='find_disease'),
 		  Fact(headache=MATCH.headache),
-		#   Fact(back_pain=MATCH.back_pain),
 		  Fact(chest_pain=MATCH.chest_pain),
 		  Fact(cough=MATCH.cough),
-		#   Fact(fainting=MATCH.fainting),
 		  Fact(sore_throat=MATCH.sore_throat),
 		  Fact(fatigue=MATCH.fatigue),
 		  Fact(low_body_temp=MATCH.low_body_temp),
 		  Fact(restlessness=MATCH.restlessness),
 		  Fact(fever=MATCH.fever),
-		#   Fact(sunken_eyes=MATCH.sunken_eyes),
 		  Fact(nausea=MATCH.nausea),
-		#   Fact(blurred_vision=MATCH.blurred_vision),
 		  NOT(Fact(disease=MATCH.disease)),salience = -999)
 
 	def not_matched(self,headache, chest_pain, cough, sore_throat, fatigue, restlessness,low_body_temp ,fever, nausea):
